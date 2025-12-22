@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-email-api
+  namespace: email-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coffee-email-api
+  template:
+    metadata:
+      labels:
+        app: coffee-email-api
+    spec:
+      containers:
+        - name: api
+          image: ulyanapitsukha/coffee-email-service:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: coffee-email-secrets
