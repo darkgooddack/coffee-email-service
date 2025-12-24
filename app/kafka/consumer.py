@@ -14,7 +14,7 @@ class KafkaEmailConsumer:
     async def start(self):
         self._consumer = AIOKafkaConsumer(
             "email.send.verification",
-            bootstrap_servers=[settings.kafka_servers],
+            bootstrap_servers=[settings.kafka.servers],
             group_id="email-service",
             enable_auto_commit=False,
             value_deserializer=lambda v: json.loads(v.decode("utf-8")),
